@@ -12,5 +12,5 @@ Set of scripts for producing histograms of the processing time of the modules in
   - `.L scripts/PlotTimes.C`
   - `.L scripts/doTimingPlots.C`
   - `plotAllTiming("input_dir")`
-- for producing the summary table for each block of modules (`producers`, `filters`, `suammry`) we use a `python` script:
+- for producing the summary table for each block of modules (`producers`, `filters`, `summary`) we use a `python` script:
   - `python python/plot_filters_time.py -s input_dir/timing_plots.root -o input_dir`, where `timing_plots.root` is the ROOT file produced by the ROOT script from the previous step
