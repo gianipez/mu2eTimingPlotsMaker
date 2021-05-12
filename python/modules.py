@@ -2,8 +2,9 @@ modules_debug = [
                  "ttt",
                  ]
 
-modules =  ["CaloClusterFast",
-            "CaloDigiMaker",
+modules =  ["makeSD",
+            "CaloClusterFast",
+            "FastCaloHitMaker",
             "cprLowPSeedDeMEventPrescale",
             "cprLowPSeedDeMHSFilter",
             "cprLowPSeedDeMPrescale",
