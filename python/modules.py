@@ -1,5 +1,9 @@
+modules_debug = [
+                 "ttt",
+                 ]
+
 modules =  ["CaloClusterFast",
-            "CaloDigiFromShower",
+            "CaloDigiMaker",
             "cprLowPSeedDeMEventPrescale",
             "cprLowPSeedDeMHSFilter",
             "cprLowPSeedDeMPrescale",

@@ -94,7 +94,7 @@ void  doTimingPlots_v2(TString Dir, TFile*File,  TString Name, TString LegName){
 void plotAllTiming(TString Dir){
   std::vector<TString> names = {"makeSD",
 				"CaloClusterFast",
-				"CaloDigiFromShower",
+				"CaloDigiMaker",
 				"cprLowPSeedDeMEventPrescale",
 				"cprLowPSeedDeMHSFilter",
 				"cprLowPSeedDeMPrescale",

@@ -2,7 +2,12 @@ import numpy as np
 import argparse
 import time
 import os, sys
-from python.modules import *
+
+my_dir=os.environ['PWD']
+my_python_dir=my_dir+'/python'
+sys.path.append(my_python_dir)
+
+from modules import *
 
 def parseArgs(argv):
     parser = argparse.ArgumentParser(prog='./merge_timing_files.py')
