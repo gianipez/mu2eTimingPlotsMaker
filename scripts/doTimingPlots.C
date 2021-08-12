@@ -39,7 +39,8 @@ void  doTimingPlots_v2(TString Dir, TFile*File,  TString Name, TString LegName){
   mu2eLabel->SetTextSize(0.030);
   mu2eLabel->SetTextAlign(13);
 
-  TImage*ots = TImage::Open("/nashome/g/gianipez/logo-OTS-20200407.pdf");
+  TImage*ots = TImage::Open("logo-OTS-20200407.pdf");
+  //TImage*ots = TImage::Open("mu2e_logo.jpg");
   float tw = 0.06;
   float th = 0.06;
   float tx = 0.19;
@@ -94,7 +95,8 @@ void  doTimingPlots_v2(TString Dir, TFile*File,  TString Name, TString LegName){
 void plotAllTiming(TString Dir){
   std::vector<TString> names = {"makeSD",
 				"CaloClusterFast",
-				"CaloDigiMaker",
+				"FastCaloHitMaker",
+				"CaloHitMakerFast",
 				"cprLowPSeedDeMEventPrescale",
 				"cprLowPSeedDeMHSFilter",
 				"cprLowPSeedDeMPrescale",

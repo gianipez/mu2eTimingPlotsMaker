@@ -4,7 +4,8 @@ modules_debug = [
 
 modules =  ["makeSD",
             "CaloClusterFast",
-            "FastCaloHitMaker",
+            #"CaloHitMaker",
+            "CaloHitMakerFast",
             "cprLowPSeedDeMEventPrescale",
             "cprLowPSeedDeMHSFilter",
             "cprLowPSeedDeMPrescale",

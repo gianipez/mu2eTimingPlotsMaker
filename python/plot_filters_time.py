@@ -16,7 +16,9 @@ from concurrent.futures import ThreadPoolExecutor
 names  = { 
     'producers' : { "makeSD",
                     "CaloClusterFast",
-                    "CaloDigiMaker",
+                    #"CaloDigiMaker",
+                    "CaloHitMakerFast",
+                    "FastCaloHitMaker",
                     "OfflineFragmentReader",
                     "TTCalHelixFinderDe",
                     "TTCalHelixMergerDeM",
@@ -128,6 +130,7 @@ def extract_info(filename, tag):
     timing_err = []
     for n in names[tag]:
         h = file.Get("hm0_{}".format(n))
+        if h == None: continue
         labels.append(n)
         timing.append(h.GetMean())
         timing_err.append(h.GetMean())
