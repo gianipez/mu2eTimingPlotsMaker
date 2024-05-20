@@ -42,7 +42,9 @@ def merge_timing_files(args):
     timing_prescale = []
     timing_filters  = []
     
-    readFile(args.input_dir+'/makeSD.csv', events, timing, args)
+    #readFile(args.input_dir+'/makeSD.csv', events, timing, args)
+    readFile(args.input_dir+'/CaloHitMakerFast.csv', events, timing, args)
+    print("[merge_timing_files] nevents from CaloHitMakerFast = {}".format(len(events)))
     timing_noFilters = timing.copy()
     timing_prescale  = np.zeros(len(timing_noFilters))
     timing_filters   = np.zeros(len(timing_noFilters))
@@ -51,7 +53,7 @@ def merge_timing_files(args):
     timing_HSFilter  = np.zeros(len(timing_noFilters))
     timing_TSFilter  = np.zeros(len(timing_noFilters))
     
-    # modules = ["TTmakeSH" , "TTmakePH" , "TTflagBkgHits", 
+    # modules = ["TTmakeSTH" , "TTmakePH" , "TTflagBkgHits", 
     #            "CaloClusterFast" , "TTtimeClusterFinder" , "TThelixFinder" ,
     #            "TTKSFDeM" , "TTKSFDeP" , 
     #            "TTCalTimePeakFinder" , "TTCalHelixFinderDe" ,
@@ -72,14 +74,12 @@ def merge_timing_files(args):
             for j, new_evt in enumerate(tmp_events):
                 if evt == new_evt:
                     timing[i] = timing[i] + tmp_timing[j]
-                    if "Filter" not in mm and "Prescale" not in mm:
+                    if "Filter" not in mm and "PS" not in mm:
                         timing_noFilters[i] = timing_noFilters[i] + tmp_timing[j]
                     if "Filter" in mm:
                         timing_filters[i]   = timing_filters[i]   + tmp_timing[j]
-                    if "Prescale" in mm:
+                    if "PS" in mm:
                         timing_prescale[i]  = timing_prescale[i]  + tmp_timing[j]
-                    if "SDCountFilter" in mm:
-                        timing_SDFilter[i]  = timing_SDFilter[i]  + tmp_timing[j]
                     if "HSFilter" in mm:
                         timing_HSFilter[i]  = timing_HSFilter[i]  + tmp_timing[j]
                     if "TCFilter" in mm:
@@ -88,7 +88,7 @@ def merge_timing_files(args):
                         timing_TSFilter[i]  = timing_TSFilter[i]  + tmp_timing[j]
                     # counter = counter + 1
                     break
-        
+
     with open(args.input_dir+'/tot_event_timing.csv', 'w') as txt_file:
         for i in range(len(events)):
             print("{}, {}".format(events[i], timing[i]), file=txt_file)

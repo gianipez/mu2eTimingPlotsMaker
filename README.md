@@ -5,9 +5,9 @@ Set of scripts for producing histograms of the processing time of the modules in
 - copy the list of the files produced by the `art(artdaq)::TimeTracker` service in a directory `input_dir`
 - open ROOT: `root.exe`
 - we need to create the list of the txt files that contains the timing info of each module: `source bash/ProcessSQL.sh input_dir`
-- let's now produce the txt for a bunch of summary timing info: `python python/merge_timing_files.py -i input_dir -max N_MAX`, where `N_MAX` is the number of events we want to process
+- let's now produce the txt for a bunch of summary timing info: `python python/merge_timing_files.py -i <path-to-csv-dir> -max N_MAX`, where `N_MAX` is the number of events we want to process
 - for the detailed histogram for each of module (and also the summary ones), we use a ROOT macro:
-  - `root.exe`
+  - `root.exe -b`
   - `gStyle->SetOptStat(111110)`
   - `.L scripts/PlotTimes.C`
   - `.L scripts/doTimingPlots.C`

@@ -7,9 +7,9 @@ void  doTimingPlots_v2(TString Dir, TFile*File,  TString Name, TString LegName){
   //   TH1F*hm0_old = new TH1F("hm0_old", Form("%s default", Name.Data())               ,100, 0, 0.03);
   TH1F*hm0_new;
   if (Name == "tot_event_timing" || Name == "tot_event_timing_noFilters") {
-    hm0_new = new TH1F(Form("hm0_%s", Name.Data()), Form("%s new sequence", Name.Data()),250, 0, 25);
+    hm0_new = new TH1F(Form("hm0_%s", Name.Data()), Form("%s ", Name.Data()),100, 0, 100);
   } else{
-    hm0_new = new TH1F(Form("hm0_%s", Name.Data()), Form("%s new sequence", Name.Data()),50, 0, 5);  
+    hm0_new = new TH1F(Form("hm0_%s", Name.Data()), Form("%s ", Name.Data()),50, 0, 50);  
   }
 
   //PlotTime("b01s6400/",Form("%s", Name.Data()), hm0_old);
@@ -81,11 +81,12 @@ void  doTimingPlots_v2(TString Dir, TFile*File,  TString Name, TString LegName){
   c0->Modified();
   gPad->Update();
   tp   ->Draw();
-  p_ots->Draw();
-  p_ots->cd();
-  ots->Draw();
+  //  p_ots->Draw();
+  // p_ots->cd();
+  //ots->Draw();
   c0->Update();
 
+  //gSystem->mkdir(Form("%s/plots", Dir.Data()));
   c0->Print(Form("%s/plots/%s.png", Dir.Data(), Name.Data()));
 
   hm0_new->Write();
@@ -97,79 +98,52 @@ void plotAllTiming(TString Dir){
 				"CaloClusterFast",
 				"FastCaloHitMaker",
 				"CaloHitMakerFast",
-				"cprLowPSeedDeMEventPrescale",
-				"cprLowPSeedDeMHSFilter",
-				"cprLowPSeedDeMPrescale",
-				"cprLowPSeedDeMSDCountFilter",
-				"cprLowPSeedDeMTCFilter",
-				"cprLowPSeedDeMTSFilter",
-				"cprLowPSeedDePEventPrescale",
-				"cprLowPSeedDePHSFilter",
-				"cprLowPSeedDePPrescale",
-				"cprLowPSeedDePSDCountFilter",
-				"cprLowPSeedDePTCFilter",
-				"cprLowPSeedDePTSFilter",
-				"cprSeedDeMEventPrescale",
-				"cprSeedDeMHSFilter",
-				"cprSeedDeMPrescale",
-				"cprSeedDeMSDCountFilter",
-				"cprSeedDeMTCFilter",
-				"cprSeedDeMTSFilter",
-				"cprSeedDePEventPrescale",
-				"cprSeedDePHSFilter",
-				"cprSeedDePPrescale",
-				"cprSeedDePSDCountFilter",
-				"cprSeedDePTCFilter",
-				"cprSeedDePTSFilter",
-				"OfflineFragmentReader",
-				"tprHelixCalibIPADeMEventPrescale",
-				"tprHelixCalibIPADeMHSFilter",
-				"tprHelixCalibIPADeMPrescale",
-				"tprHelixCalibIPADeMSDCountFilter",
-				"tprHelixCalibIPADeMTCFilter",
-				"tprHelixIPADeMEventPrescale",
-				"tprHelixIPADeMHSFilter",
-				"tprHelixIPADeMPrescale",
-				"tprHelixIPADeMSDCountFilter",
-				"tprHelixIPADeMTCFilter",
-				"tprLowPSeedDeMEventPrescale",
-				"tprLowPSeedDeMHSFilter",
-				"tprLowPSeedDeMPrescale",
-				"tprLowPSeedDeMSDCountFilter",
-				"tprLowPSeedDeMTCFilter",
-				"tprLowPSeedDeMTSFilter",
-				"tprLowPSeedDePEventPrescale",
-				"tprLowPSeedDePHSFilter",
-				"tprLowPSeedDePPrescale",
-				"tprLowPSeedDePSDCountFilter",
-				"tprLowPSeedDePTCFilter",
-				"tprLowPSeedDePTSFilter",
-				"tprSeedDeMEventPrescale",
-				"tprSeedDeMHSFilter",
-				"tprSeedDeMPrescale",
-				"tprSeedDeMSDCountFilter",
-				"tprSeedDeMTCFilter",
-				"tprSeedDeMTSFilter",
-				"tprSeedDePEventPrescale",
-				"tprSeedDePHSFilter",
-				"tprSeedDePPrescale",
-				"tprSeedDePSDCountFilter",
-				"tprSeedDePTCFilter",
-				"tprSeedDePTSFilter",
+				"cprDeLowPStopTargHSFilter",
+				"cprDeLowPStopTargPS",
+				"cprDeLowPStopTargTCFilter",
+				"cprDeLowPStopTargTSFilter",
+				"cprDeHighPStopTargHSFilter",
+				"cprDeHighPStopTargPS",
+				"cprDeHighPStopTargTCFilter",
+				"cprDeHighPStopTargTSFilter",
+                                "aprLowPStopTargHSFilter",
+				"aprLowPStopTargPS",
+				"aprLowPStopTargTCFilter",
+				"aprLowPStopTargTSFilter",
+				"aprHighPStopTargHSFilter",
+				"aprHighPStopTargPS",
+				"aprHighPStopTargTCFilter",
+				"aprHighPStopTargTSFilter",
+				//"OfflineFragmentReader",
+				"tprHelixCalibIPADeHSFilter",
+				"tprHelixCalibIPADePS",
+				"tprHelixCalibIPADeTCFilter",
+				"tprHelixIPADeHSFilter",
+				"tprHelixIPADePS",
+				"tprHelixIPADeTCFilter",
+				"tprDeLowPStopTargHSFilter",
+				"tprDeLowPStopTargPS",
+				"tprDeLowPStopTargTCFilter",
+				"tprDeLowPStopTargTSFilter",
+				"tprDeHighPStopTargHSFilter",
+				"tprDeHighPStopTargPS",
+				"tprDeHighPStopTargTCFilter",
+				"tprDeHighPStopTargTSFilter",
 				"TTCalHelixFinderDe",
-				"TTCalHelixMergerDeM",
-				"TTCalHelixMergerDeP",
-				"TTCalSeedFitDem",
+				"TTCalHelixMergerDe",
+				"TTCalSeedFitDe",
 				"TTCalSeedFitDep",
 				"TTCalTimePeakFinder",
 				"TTflagBkgHits",
 				"TThelixFinder",
-				"TTHelixMergerDeM",
-				"TTHelixMergerDeP",
-				"TTKSFDeM",
-				"TTKSFDeP",
+				"TTHelixMergerDe",
+				"TTKSFDe",
+                                "TTAprHelixFinder",
+                                "TTAprHelixMerger",
+                                "TTAprKSF",
 				"TTmakePH",
-				"TTmakeSH",
+				"TTmakeSTH",
+                                "TTTZClusterFinder",
 				"TTtimeClusterFinder",
 				"tot_event_timing",
 				"tot_event_timing_noFilters",
@@ -180,7 +154,7 @@ void plotAllTiming(TString Dir){
 				"tot_timing_HSFilter",
 				"tot_timing_TSFilter"};
 
-  //names = {"TTmakeSH" , "TTmakePH" , "TTflagBkgHits", "CaloClusterFast" , "TTtimeClusterFinder" , "TThelixFinder" , "TTKSFDeM" , "TTKSFDeP" , "TTCalTimePeakFinder" , "TTCalHelixFinderDe" , "TTCalSeedFitDem" , "TTCalSeedFitDep", "subsystemOutput_init", "subsystemOutput_write", "makeSD", "CaloDigiFromShower", "tot_event_timing", "OfflineFragmentReader", "subsystemOutput_write","subsystemOutput_init"};
+  //names = {"TTmakeSTH" , "TTmakePH" , "TTflagBkgHits", "CaloClusterFast" , "TTtimeClusterFinder" , "TThelixFinder" , "TTKSFDeM" , "TTKSFDeP" , "TTCalTimePeakFinder" , "TTCalHelixFinderDe" , "TTCalSeedFitDem" , "TTCalSeedFitDep", "subsystemOutput_init", "subsystemOutput_write", "makeSD", "CaloDigiFromShower", "tot_event_timing", "OfflineFragmentReader", "subsystemOutput_write","subsystemOutput_init"};
 
   TFile*ff = new TFile(Form("%s/timing_plots.root", Dir.Data()),"recreate");
   for (auto nn : names){
