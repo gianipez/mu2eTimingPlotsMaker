@@ -1,10 +1,10 @@
 import time
 import math
-import numpy as np
+#import numpy as np
 import matplotlib.pyplot as plt
 import glob
 
-from ROOT import TFile, TH1F
+from ROOT import TFile
 from importlib import import_module
 
 import os, sys
@@ -18,12 +18,12 @@ names  = {
                     "CaloClusterFast",
                     #"CaloDigiMaker",
                     "CaloHitMakerFast",
-                    "FastCaloHitMaker",
+                   # "FastCaloHitMaker",
                     "OfflineFragmentReader",
                     "TTCalHelixFinderDe",
                     "TTCalHelixMergerDe",
                     "TTCalSeedFitDe",
-                    "TTCalSeedFitDep",
+                   # "TTCalSeedFitDep",
                     "TTCalTimePeakFinder",
                     "TTflagBkgHits",
                     "TThelixFinder",
@@ -62,12 +62,12 @@ names  = {
                         "cprSeedDeTCFilter",
                         "cprSeedDeTSFilter"},
 
-    'filters_tpr0'   : {"tprHelixCalibIPADeHSFilter",
+    'filters_tpr0'   : {"tprHelixDeIpaPhiScaledHSFilter",
                         "tprHelixCalibIPADeSDCountFilter",
-                        "tprHelixCalibIPADeTCFilter",
-                        "tprHelixIPADeHSFilter",
+                        "tprHelixDeIpaPhiScaledTCFilter",
+                        "tprHelixDeIpaHSFilter",
                         "tprHelixIPADeSDCountFilter",
-                        "tprHelixIPADeTCFilter"},
+                        "tprHelixDeIpaTCFilter"},
 
     'filters_tpr1'   : {"tprLowPSeedDeHSFilter",
                         "tprLowPSeedDeSDCountFilter",
@@ -125,8 +125,12 @@ def plot_module_timing(args, tag):
 
     ax = plt.gca()
     # ax.set_ymargin(left=0.3,right=0)
-    y_pos = np.arange(len(labels))
+    #y_pos = np.arange(len(labels))
+    y_pos = [] #np.arange(len(labels))
 
+    for i in range(len(labels)):
+        y_pos.append(i)
+    
     ax.barh(y_pos, timing, align='center')
     ax.set_yticks(y_pos)
     ax.set_yticklabels(labels,fontsize=7)

@@ -9,8 +9,8 @@ do
     do 
         echo "--> Processing $file"
         
-        tag=(${file//_/ })
-        tag=${tag[7]}
+        tag=$2 #(${file//_/ })
+        #tag=${tag[7]}
         echo "Found tag ${tag}"
         if [[ -d "$dir/csv_${tag}" ]]; then
             continue
@@ -19,9 +19,9 @@ do
         fi
         mkdir $dir/csv_${tag}
         echo "---> Processing batch ${tag}"
-        for mod in "TTmakeSTH" "TTmakePH" "TTflagBkgHits" "CaloClusterFast" "TTtimeClusterFinder" "TThelixFinder" "TTKSFDe" "TTCalTimePeakFinder" "TTCalHelixFinderDe" "TTCalSeedFitDe" "subsystemOutput" "makeSD" "CaloHitMakerFast" "FastCaloHitMaker" "tprDeHighPStopTargSDCountFilter" "tprDeHighPStopTargTCFilter" "TTHelixMergerDe" "tprDeHighPStopTargHSFilter" "tprDeHighPStopTargTSFilter" "tprDeHighPStopTargPS" "tprLowPSeedDeSDCountFilter" "tprLowPSeedDeTCFilter" "tprLowPSeedDeHSFilter" "tprLowPSeedDeTSFilter" "tprLowPSeedDePS" "cprDeHighPStopTargSDCountFilter" "cprDeHighPStopTargTCFilter" "TTCalHelixMergerDe" "cprDeHighPStopTargHSFilter" "cprDeHighPStopTargTSFilter" "cprDeHighPStopTargPS" "cprLowPSeedDeSDCountFilter" "cprLowPSeedDeTCFilter" "cprLowPSeedDeHSFilter" "cprLowPSeedDeTSFilter" "tprHelixIPADeSDCountFilter" "tprHelixIPADeTCFilter" "tprHelixIPADeHSFilter" "tprHelixIPADePS" "tprHelixCalibIPADeSDCountFilter" "tprHelixCalibIPADeTCFilter" "tprHelixCalibIPADeHSFilter" "tprHelixCalibIPADePS" "TTTZClusterFinder" "aprHighPStopTargTCFilter" "TTAprHelixFinder" "TTAprHelixMerger" "aprHighPStopTargHSFilter" "TTAprKSF" "aprHighPStopTargKSFilter" "aprHighPStopTargTriggerInfoMerger" "aprLowPStopTargTCFilter" "aprLowPStopTargHSFilter" "aprLowPStopTargKSFilter" "aprLowPStopTargTriggerInfoMerger"; do
+        for mod in "TTmakeSH" "TTmakeSTH" "TTmakePH" "TTflagBkgHits" "CaloClusterFast" "TTtimeClusterFinder" "TThelixFinder" "TTKSFDe" "TTCalTimePeakFinder" "TTCalHelixFinderDe" "TTCalSeedFitDe" "subsystemOutput" "makeSD" "CaloHitMakerFast" "tprDeHighPStopTargSDCountFilter" "tprDeHighPStopTargTCFilter" "TTHelixMergerDe" "tprDeHighPStopTargHSFilter" "tprDeHighPStopTargKSFilter" "tprDeHighPStopTargPS" "tprLowPSeedDeSDCountFilter" "tprLowPSeedDeTCFilter" "tprLowPSeedDeHSFilter" "tprLowPSeedDeTSFilter" "tprLowPSeedDePS" "cprDeHighPStopTargSDCountFilter" "cprDeHighPStopTargTCFilter" "TTCalHelixMergerDe" "cprDeHighPStopTargHSFilter" "cprDeHighPStopTargKSFilter" "cprDeHighPStopTargPS" "cprLowPSeedDeSDCountFilter" "cprLowPSeedDeTCFilter" "cprLowPSeedDeHSFilter" "cprLowPSeedDeTSFilter" "tprHelixIPADeSDCountFilter" "tprHelixDeIpaTCFilter" "tprHelixDeIpaHSFilter" "tprHelixDeIpaPS" "tprHelixCalibIPADeSDCountFilter" "tprHelixDeIpaPhiScaledTCFilter" "tprHelixDeIpaPhiScaledHSFilter" "tprHelixDeIpaPhiScaledPS" "TTTZClusterFinder" "aprHighPStopTargTCFilter" "TTAprHelixFinder" "TTAprHelixMerger" "aprHighPStopTargHSFilter" "TTAprKSF" "aprHighPStopTargKSFilter" "aprHighPStopTargTriggerInfoMerger" "aprLowPStopTargTCFilter" "aprLowPStopTargHSFilter" "aprLowPStopTargKSFilter" "aprLowPStopTargTriggerInfoMerger" "aprHighPStopTargPS" "aprLowPStopTargPS" "cprDeLowPStopTargHSFilter" "cprDeLowPStopTargPS" "cprDeLowPStopTargTCFilter" "tprDeLowPStopTargHSFilter" "tprDeLowPStopTargPS" "tprDeLowPStopTargTCFilter"; do
 	    echo Processing module $mod
-	    sqlite3  -separator "," $file "SELECT Event, Time FROM TimeModule WHERE ModuleLabel=\"${mod}\";" >| $dir/csv_${tag}/$mod.csv
+	    sqlite3  -separator "," $file "SELECT Event, Time FROM TimeModule WHERE ModuleLabel='${mod}';" >| $dir/csv_${tag}/$mod.csv
         done
         
         sqlite3  -separator "," $file  "SELECT Event, Time FROM TimeSource" >| $dir/csv_${tag}/OfflineFragmentReader.csv

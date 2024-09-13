@@ -1,6 +1,4 @@
 
-
-
 void  doTimingPlots_v2(TString Dir, TFile*File,  TString Name, TString LegName){
   
   File->cd();
@@ -23,14 +21,20 @@ void  doTimingPlots_v2(TString Dir, TFile*File,  TString Name, TString LegName){
 
 
   //--------------------------------------------------------------------------------
-  TLegend *leg = new TLegend(0.65, 0.84, 0.86, 0.9076, NULL, "brNDC");
+  TLegend *leg = new TLegend(0.65, 0.84, 0.90, 0.9076, NULL, "brNDC");
   leg->SetFillStyle(1001);
   leg->SetFillColor(kWhite);
   leg->SetBorderSize(1);
   leg->SetShadowColor(0);
   //leg->AddEntry(hm0_old, Form("%s default", Name.Data())     , "L");
-  leg->AddEntry(hm0_new, Form("%s", LegName.Data()), "P");
-
+  double x_q[2]={0.5,0.5};
+  double y_q[2]={0.};
+  const int nq(2);
+  hm0_new->GetQuantiles(nq, y_q, x_q);
+  
+  leg->AddEntry(hm0_new, Form("%s: median = %2.1f", LegName.Data(), y_q[0]), "P");
+  
+    
   TPaveText*tp = new TPaveText(0.19, 0.899, 0.27, 0.939, "NDC");//(0.1, 0.2, 0.96, 0.99, "NDC");
   tp->SetBorderSize(0);
   tp->SetFillStyle(0);
@@ -96,43 +100,43 @@ void  doTimingPlots_v2(TString Dir, TFile*File,  TString Name, TString LegName){
 void plotAllTiming(TString Dir){
   std::vector<TString> names = {"makeSD",
 				"CaloClusterFast",
-				"FastCaloHitMaker",
+			//	"FastCaloHitMaker",
 				"CaloHitMakerFast",
 				"cprDeLowPStopTargHSFilter",
 				"cprDeLowPStopTargPS",
 				"cprDeLowPStopTargTCFilter",
-				"cprDeLowPStopTargTSFilter",
+				"cprDeLowPStopTargKSFilter",
 				"cprDeHighPStopTargHSFilter",
 				"cprDeHighPStopTargPS",
 				"cprDeHighPStopTargTCFilter",
-				"cprDeHighPStopTargTSFilter",
+				"cprDeHighPStopTargKSFilter",
                                 "aprLowPStopTargHSFilter",
 				"aprLowPStopTargPS",
 				"aprLowPStopTargTCFilter",
-				"aprLowPStopTargTSFilter",
+				"aprLowPStopTargKSFilter",
 				"aprHighPStopTargHSFilter",
 				"aprHighPStopTargPS",
 				"aprHighPStopTargTCFilter",
-				"aprHighPStopTargTSFilter",
+				"aprHighPStopTargKSFilter",
 				//"OfflineFragmentReader",
-				"tprHelixCalibIPADeHSFilter",
-				"tprHelixCalibIPADePS",
-				"tprHelixCalibIPADeTCFilter",
-				"tprHelixIPADeHSFilter",
-				"tprHelixIPADePS",
-				"tprHelixIPADeTCFilter",
+				"tprHelixDeIpaPhiScaledHSFilter",
+				"tprHelixDeIpaPhiScaledPS",
+				"tprHelixDeIpaPhiScaledTCFilter",
+				"tprHelixDeIpaHSFilter",
+				"tprHelixDeIpaPS",
+				"tprHelixDeIpaTCFilter",
 				"tprDeLowPStopTargHSFilter",
 				"tprDeLowPStopTargPS",
 				"tprDeLowPStopTargTCFilter",
-				"tprDeLowPStopTargTSFilter",
+				"tprDeLowPStopTargKSFilter",
 				"tprDeHighPStopTargHSFilter",
 				"tprDeHighPStopTargPS",
 				"tprDeHighPStopTargTCFilter",
-				"tprDeHighPStopTargTSFilter",
+				"tprDeHighPStopTargKSFilter",
 				"TTCalHelixFinderDe",
 				"TTCalHelixMergerDe",
 				"TTCalSeedFitDe",
-				"TTCalSeedFitDep",
+			//	"TTCalSeedFitDep",
 				"TTCalTimePeakFinder",
 				"TTflagBkgHits",
 				"TThelixFinder",
@@ -141,6 +145,7 @@ void plotAllTiming(TString Dir){
                                 "TTAprHelixFinder",
                                 "TTAprHelixMerger",
                                 "TTAprKSF",
+                                "TTmakeSH",
 				"TTmakePH",
 				"TTmakeSTH",
                                 "TTTZClusterFinder",
@@ -154,7 +159,7 @@ void plotAllTiming(TString Dir){
 				"tot_timing_HSFilter",
 				"tot_timing_TSFilter"};
 
-  //names = {"TTmakeSTH" , "TTmakePH" , "TTflagBkgHits", "CaloClusterFast" , "TTtimeClusterFinder" , "TThelixFinder" , "TTKSFDeM" , "TTKSFDeP" , "TTCalTimePeakFinder" , "TTCalHelixFinderDe" , "TTCalSeedFitDem" , "TTCalSeedFitDep", "subsystemOutput_init", "subsystemOutput_write", "makeSD", "CaloDigiFromShower", "tot_event_timing", "OfflineFragmentReader", "subsystemOutput_write","subsystemOutput_init"};
+  //names = {"TTmakeSTH" , "TTmakePH" , "TTflagBkgHits", "CaloClusterFast" , "TTtimeClusterFinder" , "TThelixFinder" , "TTKSFDeM" , "TTKSFDeP" , "TTCalTimePeakFinder" , "TTCalHelixFinderDe" , "TTCalSeedFitDe" "subsystemOutput_init", "subsystemOutput_write", "makeSD", "CaloDigiFromShower", "tot_event_timing", "OfflineFragmentReader", "subsystemOutput_write","subsystemOutput_init"};
 
   TFile*ff = new TFile(Form("%s/timing_plots.root", Dir.Data()),"recreate");
   for (auto nn : names){
