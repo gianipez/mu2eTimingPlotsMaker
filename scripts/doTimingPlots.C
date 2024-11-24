@@ -5,9 +5,11 @@ void  doTimingPlots_v2(TString Dir, TFile*File,  TString Name, TString LegName){
   //   TH1F*hm0_old = new TH1F("hm0_old", Form("%s default", Name.Data())               ,100, 0, 0.03);
   TH1F*hm0_new;
   if (Name == "tot_event_timing" || Name == "tot_event_timing_noFilters") {
-    hm0_new = new TH1F(Form("hm0_%s", Name.Data()), Form("%s ", Name.Data()),100, 0, 100);
+    hm0_new = new TH1F(Form("hm0_%s", Name.Data()), Form("%s ", Name.Data()),25, 0, 15);//100);
   } else{
-    hm0_new = new TH1F(Form("hm0_%s", Name.Data()), Form("%s ", Name.Data()),50, 0, 50);  
+    //  hm0_new = new TH1F(Form("hm0_%s", Name.Data()), Form("%s ", Name.Data()),50, 0, 50); X AXIS LENGTH EDIT
+    hm0_new = new TH1F(Form("hm0_%s", Name.Data()), Form("%s ", Name.Data()),25, 0, 1);
+    
   }
 
   //PlotTime("b01s6400/",Form("%s", Name.Data()), hm0_old);
@@ -27,12 +29,22 @@ void  doTimingPlots_v2(TString Dir, TFile*File,  TString Name, TString LegName){
   leg->SetBorderSize(1);
   leg->SetShadowColor(0);
   //leg->AddEntry(hm0_old, Form("%s default", Name.Data())     , "L");
-  double x_q[2]={0.5,0.5};
-  double y_q[2]={0.};
-  const int nq(2);
-  hm0_new->GetQuantiles(nq, y_q, x_q);
-  
-  leg->AddEntry(hm0_new, Form("%s: median = %2.1f", LegName.Data(), y_q[0]), "P");
+  //double x_q[2]={0.5,0.5};
+  //double y_q[2]={0.};
+  //const int nq(2);
+  //hm0_new->GetQuantiles(nq, y_q, x_q);
+
+  int numBins = hm0_new->GetXaxis()->GetNbins();
+  Double_t *x = new Double_t[numBins];
+  Double_t* y = new Double_t[numBins];
+  for (int i = 0; i < numBins; i++) {
+    x[i] = hm0_new->GetBinCenter(i);
+    y[i] = hm0_new->GetBinContent(i);
+  }
+  //double medianOfHisto = TMath::Median(numBins, &x[0], &y[1]);
+  double medianOfHisto = TMath::Median(numBins, x, y);
+ 
+  leg->AddEntry(hm0_new, Form("median = %2.1f", medianOfHisto), "P");
   
     
   TPaveText*tp = new TPaveText(0.19, 0.899, 0.27, 0.939, "NDC");//(0.1, 0.2, 0.96, 0.99, "NDC");
@@ -139,6 +151,7 @@ void plotAllTiming(TString Dir){
 			//	"TTCalSeedFitDep",
 				"TTCalTimePeakFinder",
 				"TTflagBkgHits",
+				"TTDeltaFinder",
 				"TThelixFinder",
 				"TTHelixMergerDe",
 				"TTKSFDe",
