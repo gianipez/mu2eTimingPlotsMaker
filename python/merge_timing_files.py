@@ -1,4 +1,4 @@
-import numpy as np
+#import numpy as np
 import argparse
 import time
 import os, sys
@@ -46,14 +46,27 @@ def merge_timing_files(args):
     readFile(args.input_dir+'/CaloHitMakerFast.csv', events, timing, args)
     print("[merge_timing_files] nevents from CaloHitMakerFast = {}".format(len(events)))
     timing_noFilters = timing.copy()
+    '''
     timing_prescale  = np.zeros(len(timing_noFilters))
     timing_filters   = np.zeros(len(timing_noFilters))
     timing_SDFilter  = np.zeros(len(timing_noFilters))
     timing_TCFilter  = np.zeros(len(timing_noFilters))
     timing_HSFilter  = np.zeros(len(timing_noFilters))
     timing_TSFilter  = np.zeros(len(timing_noFilters))
+    '''
+    timing_SDFilter = []
+    timing_TCFilter = []
+    timing_HSFilter = []
+    timing_TSFilter = []
+    for placeholder_index in range(len(timing_noFilters)):
+        timing_prescale.append(0)
+        timing_filters.append(0)
+        timing_SDFilter.append(0)
+        timing_TCFilter.append(0)
+        timing_HSFilter.append(0)
+        timing_TSFilter.append(0)
     
-    # modules = ["TTmakeSTH" , "TTmakePH" , "TTflagBkgHits", 
+    # modules = ["TTmakeSTH" , "TTmakePH" , "TTflagPH", 
     #            "CaloClusterFast" , "TTtimeClusterFinder" , "TThelixFinder" ,
     #            "TTKSFDeM" , "TTKSFDeP" , 
     #            "TTCalTimePeakFinder" , "TTCalHelixFinderDe" ,

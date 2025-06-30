@@ -8,6 +8,7 @@ Set of scripts for producing histograms of the processing time of the modules in
 - for the detailed histogram for each of module (and also the summary ones), we use a ROOT macro:
   - `root.exe -b`
   - `gStyle->SetOptStat(111110)`
+  - `gStyle->SetOptTitle(0)`
   - `.L scripts/PlotTimes.C`
   - `.L scripts/doTimingPlots.C`
   - `plotAllTiming("input_dir/ntasks_x/csv_yz")`
