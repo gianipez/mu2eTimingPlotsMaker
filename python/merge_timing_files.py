@@ -66,7 +66,7 @@ def merge_timing_files(args):
         timing_HSFilter.append(0)
         timing_TSFilter.append(0)
     
-    # modules = ["TTmakeSTH" , "TTmakePH" , "TTflagBkgHits", 
+    # modules = ["TTmakeSTH" , "TTmakePH" , "TTflagPH", 
     #            "CaloClusterFast" , "TTtimeClusterFinder" , "TThelixFinder" ,
     #            "TTKSFDeM" , "TTKSFDeP" , 
     #            "TTCalTimePeakFinder" , "TTCalHelixFinderDe" ,

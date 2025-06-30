@@ -25,7 +25,7 @@ names  = {
                     "TTCalSeedFitDe",
                    # "TTCalSeedFitDep",
                     "TTCalTimePeakFinder",
-                    "TTflagBkgHits",
+                    "TTflagPH",
                     "TThelixFinder",
                     "TTHelixMergerDe",
                     "TTKSFDe",
